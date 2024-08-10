@@ -1,7 +1,10 @@
 FROM ubuntu:latest
 # Install cron
-RUN apt-get update && apt-get install -y cron \
-    python3.11
+RUN apt-get update && apt-get install -y cron
+RUN apt install software-properties-common -y
+RUN add-apt-repository ppa:deadsnakes/ppa
+RUN apt-get update -y
+RUN apt install python3.11 python3-pip -y
 RUN export PATH=$PATH:/usr/bin/python3.11
 COPY . /app
 RUN crontab /app/update.cron
